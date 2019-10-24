@@ -3,7 +3,7 @@ package game.players;
 public abstract class Human {
     private String name;
 
-    public Human(String name) {
+    Human(String name) {
         this.name = name;
     }
 

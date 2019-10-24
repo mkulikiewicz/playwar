@@ -10,11 +10,11 @@ public class Card {
     }
 
     public String toString() {
-        return rank +""+color;
+        return rank + "" + color;
     }
 
 
-    public Rank getRank() {
+    private Rank getRank() {
         return rank;
     }
 

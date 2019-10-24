@@ -1,7 +1,7 @@
 package game.equipment.card;
 
 public enum Color {
-    SPADES('\u2660'),// pik ♠
+    SPADES('\u2660'),// ♠
     HEARTS('\u2665'), // ♥
     CLUBS('\u2663'), // ♣
     DIAMONDS('\u2666'); // ♦

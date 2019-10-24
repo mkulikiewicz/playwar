@@ -1,5 +1,6 @@
 package game.equipment;
 
+import game.engine.exception.NoWinnerException;
 import game.equipment.card.Card;
 import game.players.Player;
 
@@ -9,19 +10,21 @@ public class GameTable {
 
 
     private Map<Player, Card> cardAndPlayersInTable = new HashMap<>();
-    private Set<Card> cardAndPlayersContainerInTable = new HashSet<Card>();
+    private Set<Card> cardAndPlayersContainerInTable = new HashSet<>();
 
     public void putCard(Player player, Card card) {
         cardAndPlayersInTable.put(player, card);
     }
 
-    public Player checkWiningCard() {
+    public Player checkWinnerPlayer() throws NoWinnerException {
         Map.Entry<Player, Card> winnerEntry = null;
         for (Map.Entry<Player, Card> entry : cardAndPlayersInTable.entrySet()) {
             if (winnerEntry == null || entry.getValue().biggerRankThen(winnerEntry.getValue())) {
                 winnerEntry = entry;
             }
         }
+        if (winnerEntry == null && cardAndPlayersContainerInTable.size() > 0)
+            throw new NoWinnerException();
         assert winnerEntry != null;
         return winnerEntry.getKey();
     }
@@ -35,13 +38,8 @@ public class GameTable {
         return temp;
     }
 
-
-    public void showPlayersWithCardsInTable() {
-        if (cardAndPlayersInTable.size() > 0) {
-            for (Map.Entry<Player, Card> entry : cardAndPlayersInTable.entrySet()) {
-                System.out.println(entry.getKey() + ":" + entry.getValue());
-            }
-        }
+    public Map<Player, Card> showCardFromTable() {
+        return cardAndPlayersInTable;
     }
 
     private Card getWiningCard() {
@@ -74,12 +72,10 @@ public class GameTable {
     }
 
     public Set<Player> getListOfWinnersPlayer() {
-        Card winningCard = getWiningCard();
-        Set<Player> winningPlayer = new HashSet<Player>();
+        Set<Player> winningPlayer = new HashSet<>();
         for (Map.Entry<Player, Card> entry : cardAndPlayersInTable.entrySet()) {
-            if (entry.getValue().equalsRank(getWiningCard())) {
+            if (entry.getValue().equalsRank(getWiningCard()))
                 winningPlayer.add(entry.getKey());
-            }
         }
         return winningPlayer;
     }
