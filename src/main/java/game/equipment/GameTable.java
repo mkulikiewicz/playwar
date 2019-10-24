@@ -4,13 +4,12 @@ import game.equipment.card.Card;
 import game.players.Player;
 
 import java.util.*;
-import java.util.stream.Stream;
 
 public class GameTable {
 
 
     private Map<Player, Card> cardAndPlayersInTable = new HashMap<>();
-    private Map<Player, Card> cardAndPlayersContainerInTable = new HashMap<>();
+    private Set<Card> cardAndPlayersContainerInTable = new HashSet<Card>();
 
     public void putCard(Player player, Card card) {
         cardAndPlayersInTable.put(player, card);
@@ -28,12 +27,12 @@ public class GameTable {
     }
 
     public Collection<Card> getCardFromTable() {
-        Map<Player, Card> temp = new HashMap<>();
-        temp.putAll(cardAndPlayersInTable);
-        temp.putAll(cardAndPlayersContainerInTable);
+        Collection<Card> temp = new HashSet<>();
+        temp.addAll(cardAndPlayersInTable.values());
+        temp.addAll(cardAndPlayersContainerInTable);
         cardAndPlayersInTable.clear();
         cardAndPlayersContainerInTable.clear();
-        return temp.values();
+        return temp;
     }
 
 
@@ -86,11 +85,11 @@ public class GameTable {
     }
 
     public void addCardToContainer() {
-        cardAndPlayersContainerInTable.putAll(cardAndPlayersInTable);
+        cardAndPlayersContainerInTable.addAll(cardAndPlayersInTable.values());
         cardAndPlayersInTable.clear();
     }
 
-    public void putCardToContainer(Player player, Card card) {
-        cardAndPlayersContainerInTable.put(player, card);
+    public void putCardToContainer(Card card) {
+        cardAndPlayersContainerInTable.add( card);
     }
 }

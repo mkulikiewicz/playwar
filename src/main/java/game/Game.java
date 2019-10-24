@@ -24,18 +24,27 @@ public class Game {
         gameMaster.dealTheCards(playersList);
 
         while (getPlayersWithCards().size() > 1) {
-            for (Player player : getPlayersWithCards()) {
+            List<Player> playerList = getPlayersWithCards();
+            for (Player player : playerList) {
                 player.putCardToTable(gameTable);
             }
-            gameTable.showPlayersWithCardsInTable();
-
-            if (gameMaster.isWarTime(gameTable)) {
+            if (gameMaster.isWarTime(gameTable))
                 startWar(gameTable);
-                addReward(gameMaster.checkWiningCardInTable(gameTable), gameTable);
-            }
+            addReward(gameMaster.checkWiningCardInTable(gameTable), gameTable);
         }
-        showPlayerHand(playersList);
+
+        endGameMessage(playersList);
+        System.out.println("Na stole:" + gameTable.getCardFromTable());
     }
+
+    private static void endGameMessage(List<Player> playersWithCards) {
+        for (Player x : playersList) {
+            if (x.getCardCount() > 0)
+                System.out.println("The winner is: " + x.getName() + " he have a " + x.getCardCount() + " cards");
+        }
+
+    }
+
 
     private static List<Player> getPlayersWithCards() {
         return playersList.stream().filter(Player::isPlayerHaveCard).collect(Collectors.toList());
@@ -47,7 +56,7 @@ public class Game {
     }
 
 
-    public static void startWar(GameTable gameTable) throws NoSuchElementException {
+    public static void startWar(GameTable gameTable) {
         System.out.println("it is WAR !!!");
 
         Set<Player> playersList = gameTable.getListOfWinnersPlayer();
@@ -55,8 +64,12 @@ public class Game {
         gameTable.addCardToContainer();
 
         for (Player player : playersList) {
-            player.putCardToTableContainer(gameTable);
-            player.putCardToTable(gameTable);
+            try {
+                player.putCardToTableContainer(gameTable);
+                player.putCardToTable(gameTable);
+            } catch (NoSuchElementException e) {
+                System.out.println(player.getName() + " don't have enough card :(");
+            }
         }
 
         gameTable.showPlayersWithCardsInTable();

@@ -39,12 +39,19 @@ public class Player extends Human {
     }
 
     public void putCardToTableContainer(GameTable gameTable) throws NoSuchElementException {
-        if(cardInHand.size()>0)
-        gameTable.putCardToContainer(this, cardInHand.element());
-        throw new NoSuchElementException();
+        if (isPlayerHaveCard()) {
+            gameTable.putCardToContainer(cardInHand.element());
+        } else {
+            throw new NoSuchElementException();
+        }
     }
 
     public void getCardFromTable(GameTable gameTable) {
         cardInHand.addAll(gameTable.getCardFromTable());
+    }
+
+    public int getCardCount()
+    {
+        return cardInHand.size();
     }
 }
