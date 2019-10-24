@@ -9,7 +9,7 @@ public enum Color {
     private char rank;
 
     Color(char c) {
-        this.rank=c;
+        this.rank = c;
     }
 
     @Override

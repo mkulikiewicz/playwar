@@ -90,6 +90,6 @@ public class GameTable {
     }
 
     public void putCardToContainer(Card card) {
-        cardAndPlayersContainerInTable.add( card);
+        cardAndPlayersContainerInTable.add(card);
     }
 }
