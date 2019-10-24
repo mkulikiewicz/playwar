@@ -1,10 +1,10 @@
 package game.players;
 
+import game.engine.exception.NoEnoughCardException;
 import game.equipment.GameTable;
 import game.equipment.card.Card;
 
 import java.util.LinkedList;
-import java.util.NoSuchElementException;
 import java.util.Queue;
 
 public class Player extends Human {
@@ -24,10 +24,8 @@ public class Player extends Human {
         return cardInHand.size() > 0;
     }
 
-    public void controlMetodeToShowCardInHenad() {
-        for (Card x : cardInHand) {
-            System.out.println("\t" + x);
-        }
+    Queue<Card> getPlayerAllCard() {
+        return cardInHand;
     }
 
     public void putCardToTable(GameTable gameTable) {
@@ -38,20 +36,18 @@ public class Player extends Human {
         return getName();
     }
 
-    public void putCardToTableContainer(GameTable gameTable) throws NoSuchElementException {
+    public void putCardToTableContainer(GameTable gameTable) throws NoEnoughCardException {
         if (isPlayerHaveCard()) {
             gameTable.putCardToContainer(cardInHand.element());
-        } else {
-            throw new NoSuchElementException();
-        }
+        } else
+            throw new NoEnoughCardException();
     }
 
     public void getCardFromTable(GameTable gameTable) {
         cardInHand.addAll(gameTable.getCardFromTable());
     }
 
-    public int getCardCount()
-    {
+    public int getCardCount() {
         return cardInHand.size();
     }
 }

@@ -1,65 +1,84 @@
 package game;
 
+import game.engine.Printer;
+import game.engine.exception.NoEnoughCardException;
 import game.equipment.GameTable;
 import game.players.GameMaster;
 import game.players.Player;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.NoSuchElementException;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Game {
     private static List<Player> playersList = new ArrayList<>();
+    private static Printer printer = new Printer();
 
     public static void main(String[] args) {
-
-        playersList = addPlayers(Integer.parseInt(args[0]));
-
-        GameMaster gameMaster = new GameMaster("Mistrz gry");
-
+        int playerCount = trySignArgs(args); // default value 5
+        playersList = addPlayers(playerCount);
+        GameMaster gameMaster = new GameMaster("Game master");
         GameTable gameTable = new GameTable();
-
+        checkIsEnoughCard(gameMaster);
         gameMaster.dealTheCards(playersList);
 
-        while (getPlayersWithCards().size() > 1) {
-            List<Player> playerList = getPlayersWithCards();
+        while (getPlayersWithAvailableCards().size() > 1) {
+            List<Player> playerList = getPlayersWithAvailableCards();
             for (Player player : playerList) {
                 player.putCardToTable(gameTable);
             }
+            printer.printCardFromTable(gameTable);
             if (gameMaster.isWarTime(gameTable))
                 startWar(gameTable);
-            addReward(gameMaster.checkWiningCardInTable(gameTable), gameTable);
+
+            Optional<Player> winner = gameMaster.checkWinnerPlayerInTable(gameTable);
+            if (winner.isPresent()) {
+                addReward(winner.get(), gameTable);
+                printer.showPlayerStats(playerList);
+            } else {
+                Player playerWithHaveTakenCard = gameMaster.giveCardFromTableToGraterPlayer(gameTable, playerList);
+                printer.noWinner(playerWithHaveTakenCard);
+            }
         }
 
-        endGameMessage(playersList);
-        System.out.println("Na stole:" + gameTable.getCardFromTable());
+        printer.printEndGameMessage(playersList);
+        printer.printCardFromTable(gameTable);
     }
 
-    private static void endGameMessage(List<Player> playersWithCards) {
-        for (Player x : playersList) {
-            if (x.getCardCount() > 0)
-                System.out.println("The winner is: " + x.getName() + " he have a " + x.getCardCount() + " cards");
+    private static int trySignArgs(String[] args) {
+        try {
+            return Integer.parseInt(args[0]);
+        } catch (NumberFormatException e) {
+            printer.printInCorrectArgument(e);
+            return 5;
+        }
+    }
+
+    private static void checkIsEnoughCard(GameMaster gameMaster) {
+        if (!gameMaster.isEnoughCard(playersList)) {
+            printer.printNotEnoughCardToStartGame();
+            System.exit(0);
         }
 
     }
 
 
-    private static List<Player> getPlayersWithCards() {
+    private static List<Player> getPlayersWithAvailableCards() {
         return playersList.stream().filter(Player::isPlayerHaveCard).collect(Collectors.toList());
     }
 
     private static void addReward(Player winner, GameTable gameTable) {
-        System.out.println("Winner:" + gameTable.checkWiningCard());
+        printer.printRoundWinner(winner);
         winner.getCardFromTable(gameTable);
     }
 
 
-    public static void startWar(GameTable gameTable) {
-        System.out.println("it is WAR !!!");
+    private static void startWar(GameTable gameTable) {
 
         Set<Player> playersList = gameTable.getListOfWinnersPlayer();
+        printer.printStartWar(playersList);
 
         gameTable.addCardToContainer();
 
@@ -67,30 +86,22 @@ public class Game {
             try {
                 player.putCardToTableContainer(gameTable);
                 player.putCardToTable(gameTable);
-            } catch (NoSuchElementException e) {
-                System.out.println(player.getName() + " don't have enough card :(");
+            } catch (NoEnoughCardException e) {
+                printer.printPlayerWithNotEnoughCard(player);
             }
         }
 
-        gameTable.showPlayersWithCardsInTable();
+        printer.printCardFromTableInWar(gameTable);
 
         if (gameTable.isWar())
             startWar(gameTable);
     }
 
-    public static List<Player> addPlayers(int playerCount) {
+    private static List<Player> addPlayers(int playerCount) {
         List<Player> playersList = new ArrayList<>();
         for (int i = 1; i <= playerCount; i++) {
             playersList.add(new Player(String.format("Player{%d}", i)));
         }
         return playersList;
-    }
-
-    static void showPlayerHand(List<Player> playersList) {
-        for (Player x : playersList) {
-            System.out.println(x.getName());
-            x.controlMetodeToShowCardInHenad();
-        }
-
     }
 }

@@ -37,6 +37,34 @@ public class Deck {
         cardDeck.add(new Card(Rank.NINE, Color.CLUBS));
         cardDeck.add(new Card(Rank.NINE, Color.HEARTS));
         cardDeck.add(new Card(Rank.NINE, Color.SPADES));
+//        cardDeck.add(new Card(Rank.EIGHT, Color.DIAMONDS));
+//        cardDeck.add(new Card(Rank.EIGHT, Color.CLUBS));
+//        cardDeck.add(new Card(Rank.EIGHT, Color.HEARTS));
+//        cardDeck.add(new Card(Rank.EIGHT, Color.SPADES));
+//        cardDeck.add(new Card(Rank.SEVEN, Color.DIAMONDS));
+//        cardDeck.add(new Card(Rank.SEVEN, Color.CLUBS));
+//        cardDeck.add(new Card(Rank.SEVEN, Color.HEARTS));
+//        cardDeck.add(new Card(Rank.SEVEN, Color.SPADES));
+//        cardDeck.add(new Card(Rank.SIX, Color.DIAMONDS));
+//        cardDeck.add(new Card(Rank.SIX, Color.CLUBS));
+//        cardDeck.add(new Card(Rank.SIX, Color.HEARTS));
+//        cardDeck.add(new Card(Rank.SIX, Color.SPADES));
+//        cardDeck.add(new Card(Rank.FIVE, Color.DIAMONDS));
+//        cardDeck.add(new Card(Rank.FIVE, Color.CLUBS));
+//        cardDeck.add(new Card(Rank.FIVE, Color.HEARTS));
+//        cardDeck.add(new Card(Rank.FIVE, Color.SPADES));
+//        cardDeck.add(new Card(Rank.FOUR, Color.DIAMONDS));
+//        cardDeck.add(new Card(Rank.FOUR, Color.CLUBS));
+//        cardDeck.add(new Card(Rank.FOUR, Color.HEARTS));
+//        cardDeck.add(new Card(Rank.FOUR, Color.SPADES));
+//        cardDeck.add(new Card(Rank.THREE, Color.DIAMONDS));
+//        cardDeck.add(new Card(Rank.THREE, Color.CLUBS));
+//        cardDeck.add(new Card(Rank.THREE, Color.HEARTS));
+//        cardDeck.add(new Card(Rank.THREE, Color.SPADES));
+//        cardDeck.add(new Card(Rank.TWO, Color.DIAMONDS));
+//        cardDeck.add(new Card(Rank.TWO, Color.CLUBS));
+//        cardDeck.add(new Card(Rank.TWO, Color.HEARTS));
+//        cardDeck.add(new Card(Rank.TWO, Color.SPADES));
         shuffleCard();
     }
 
@@ -63,11 +91,11 @@ public class Deck {
         cardDeck = deckAfterShuffle;
     }
 
-    private List<Card> getDeck() {
-        return cardDeck;
+    public int size() {
+        return cardDeck.size();
     }
 
     public boolean isDeckEmpty() {
-        return getDeck().size() == 0;
+        return cardDeck.size() == 0;
     }
 }
