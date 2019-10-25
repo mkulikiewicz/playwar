@@ -10,7 +10,7 @@ import java.util.Optional;
 
 public class GameMaster extends Human {
 
-    private static final Deck DECK = new Deck();
+    static final Deck DECK = new Deck();
 
     public GameMaster(String name) {
         super(name);
@@ -26,7 +26,7 @@ public class GameMaster extends Human {
 
     public Optional<Player> checkWinnerPlayerInTable(GameTable gameTable) {
         try {
-            return Optional.of(gameTable.checkWinnerPlayer());
+            return Optional.of(gameTable.getWinnerPlayer());
         } catch (NoWinnerException e) {
             return Optional.empty();
         }

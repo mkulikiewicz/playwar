@@ -5,12 +5,13 @@ import game.equipment.GameTable;
 import game.equipment.card.Card;
 
 import java.util.LinkedList;
+import java.util.Objects;
 import java.util.Queue;
 
 public class Player extends Human {
 
 
-    private Queue<Card> cardInHand = new LinkedList<>();
+    Queue<Card> cardInHand = new LinkedList<>();
 
     public Player(String name) {
         super(name);
@@ -28,8 +29,11 @@ public class Player extends Human {
         return cardInHand;
     }
 
-    public void putCardToTable(GameTable gameTable) {
-        gameTable.putCard(this, cardInHand.remove());
+    public void putCardToTable(GameTable gameTable) throws NoEnoughCardException {
+        if(isPlayerHaveCard()) {
+            gameTable.putCard(this, cardInHand.remove());
+        }else
+            throw new NoEnoughCardException();
     }
 
     public String toString() {
@@ -38,7 +42,7 @@ public class Player extends Human {
 
     public void putCardToTableContainer(GameTable gameTable) throws NoEnoughCardException {
         if (isPlayerHaveCard()) {
-            gameTable.putCardToContainer(cardInHand.element());
+            gameTable.putCardToContainer(cardInHand.remove());
         } else
             throw new NoEnoughCardException();
     }
@@ -49,5 +53,15 @@ public class Player extends Human {
 
     public int getCardCount() {
         return cardInHand.size();
+    }
+
+
+    @Override
+    public boolean equals(Object obj) {
+        if (Objects.nonNull(obj) && obj instanceof Player) {
+            if (((Player) obj).getName().equals(this.getName()) && ((Player) obj).getPlayerAllCard().containsAll(this.getPlayerAllCard()))
+                return true;
+        }
+        return false;
     }
 }

@@ -5,12 +5,13 @@ import game.equipment.card.Color;
 import game.equipment.card.Rank;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Deck {
-    private List<Card> cardDeck = new ArrayList<>();
+    private List<Card> cardDeck = new LinkedList<>();
 
     public Deck() {
         cardDeck.add(new Card(Rank.ACE, Color.DIAMONDS));
@@ -77,6 +78,14 @@ public class Deck {
         return Optional.empty();
     }
 
+    public int size() {
+        return cardDeck.size();
+    }
+
+    public boolean isDeckEmpty() {
+        return cardDeck.size() == 0;
+    }
+
     private void shuffleCard() {
         List<Card> deckAfterShuffle = new ArrayList<>();
         while (cardDeck.size() != 0) {
@@ -89,13 +98,5 @@ public class Deck {
             }
         }
         cardDeck = deckAfterShuffle;
-    }
-
-    public int size() {
-        return cardDeck.size();
-    }
-
-    public boolean isDeckEmpty() {
-        return cardDeck.size() == 0;
     }
 }

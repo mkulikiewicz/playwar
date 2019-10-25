@@ -16,7 +16,7 @@ public class Game {
     private static List<Player> playersList = new ArrayList<>();
     private static Printer printer = new Printer();
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws NoEnoughCardException {
         int playerCount = trySignArgs(args); // default value 5
         playersList = addPlayers(playerCount);
         GameMaster gameMaster = new GameMaster("Game master");
@@ -38,8 +38,8 @@ public class Game {
                 addReward(winner.get(), gameTable);
                 printer.showPlayerStats(playerList);
             } else {
-                Player playerWithHaveTakenCard = gameMaster.giveCardFromTableToGraterPlayer(gameTable, playerList);
-                printer.noWinner(playerWithHaveTakenCard);
+                Player playerWhichHaveTakenCard = gameMaster.giveCardFromTableToGraterPlayer(gameTable, playerList);
+                printer.noWinner(playerWhichHaveTakenCard);
             }
         }
 

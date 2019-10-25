@@ -1,5 +1,7 @@
 package game.equipment.card;
 
+import java.util.Objects;
+
 public class Card {
     private Color color;
     private Rank rank;
@@ -13,18 +15,20 @@ public class Card {
         return rank + "" + color;
     }
 
-
-    private Rank getRank() {
-        return rank;
-    }
-
     public boolean biggerRankThen(Card card) {
-        return this.getRank().ordinal() > card.getRank().ordinal();
+        return this.rank.ordinal() > card.rank.ordinal();
     }
 
     public boolean equalsRank(Card card) {
-        return this.getRank().ordinal() == card.getRank().ordinal();
+        return this.rank.ordinal() == card.rank.ordinal();
     }
 
-
+    @Override
+    public boolean equals(Object obj) {
+        if (Objects.nonNull(obj) && obj instanceof Card) {
+            if (((Card) obj).color == color && ((Card) obj).rank == rank)
+                return true;
+        }
+        return false;
+    }
 }
