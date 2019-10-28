@@ -1,4 +1,4 @@
-package game.equipment.card;
+package game.main.card;
 
 public enum Color {
     SPADES('\u2660'),// ♠

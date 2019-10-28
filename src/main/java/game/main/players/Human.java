@@ -1,6 +1,6 @@
-package game.players;
+package game.main.players;
 
-public abstract class Human {
+abstract class Human {
     private String name;
 
     Human(String name) {

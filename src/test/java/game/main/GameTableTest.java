@@ -1,10 +1,10 @@
-package game.equipment;
+package game.main;
 
-import game.engine.exception.NoWinnerException;
-import game.equipment.card.Card;
-import game.equipment.card.Color;
-import game.equipment.card.Rank;
-import game.players.Player;
+import game.main.card.Card;
+import game.main.card.Color;
+import game.main.card.Rank;
+import game.main.players.NoWinnerException;
+import game.main.players.Player;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;

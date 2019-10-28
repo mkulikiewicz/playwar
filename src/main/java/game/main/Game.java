@@ -1,10 +1,7 @@
-package game;
+package game.main;
 
-import game.engine.Printer;
-import game.engine.exception.NoEnoughCardException;
-import game.equipment.GameTable;
-import game.players.GameMaster;
-import game.players.Player;
+import game.main.players.GameMaster;
+import game.main.players.Player;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +13,7 @@ public class Game {
     private static List<Player> playersList = new ArrayList<>();
     private static Printer printer = new Printer();
 
-    public static void main(String[] args) throws NoEnoughCardException {
+    public static void main(String[] args) throws Exception {
         int playerCount = trySignArgs(args); // default value 5
         playersList = addPlayers(playerCount);
         GameMaster gameMaster = new GameMaster("Game master");
@@ -44,7 +41,6 @@ public class Game {
         }
 
         printer.printEndGameMessage(playersList);
-        printer.printCardFromTable(gameTable);
     }
 
     private static int trySignArgs(String[] args) {
@@ -86,7 +82,7 @@ public class Game {
             try {
                 player.putCardToTableContainer(gameTable);
                 player.putCardToTable(gameTable);
-            } catch (NoEnoughCardException e) {
+            } catch (Exception e) {
                 printer.printPlayerWithNotEnoughCard(player);
             }
         }

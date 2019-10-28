@@ -1,9 +1,9 @@
-package game.players;
+package game.main.players;
 
-import game.equipment.GameTable;
-import game.equipment.card.Card;
-import game.equipment.card.Color;
-import game.equipment.card.Rank;
+import game.main.GameTable;
+import game.main.card.Card;
+import game.main.card.Color;
+import game.main.card.Rank;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.testng.Assert.*;
 
 public class GameMasterTest {
 
@@ -99,26 +98,25 @@ public class GameMasterTest {
         playersList.add(playerWithTheBiggestCardCount);
         playersList.add(secondPlayer);
 
-        Card cardInHand = new Card(Rank.TEN,Color.DIAMONDS);
-        Card firstCardInTable = new Card(Rank.ACE,Color.DIAMONDS);
-        Card secondCardInTable = new Card(Rank.KNIGHT,Color.DIAMONDS);
-        Card cardInSecondPlayerHand = new Card(Rank.KNIGHT , Color.CLUBS);
+        Card cardInHand = new Card(Rank.TEN, Color.DIAMONDS);
+        Card firstCardInTable = new Card(Rank.ACE, Color.DIAMONDS);
+        Card secondCardInTable = new Card(Rank.KNIGHT, Color.DIAMONDS);
+        Card cardInSecondPlayerHand = new Card(Rank.KNIGHT, Color.CLUBS);
 
         playerWithTheBiggestCardCount.takeCardToHand(cardInHand);
         secondPlayer.takeCardToHand(cardInSecondPlayerHand);
 
         gameTable.putCardToContainer(firstCardInTable);
-        gameTable.putCard(secondPlayer,secondCardInTable);
+        gameTable.putCard(secondPlayer, secondCardInTable);
         //When
-        Player playerWhichTakeCard = gameMaster.giveCardFromTableToGraterPlayer(gameTable,playersList);
+        Player playerWhichTakeCard = gameMaster.giveCardFromTableToGraterPlayer(gameTable, playersList);
         //Then
         assertThat(playerWithTheBiggestCardCount).isEqualTo(playerWhichTakeCard);
-        assertThat(playerWithTheBiggestCardCount.getPlayerAllCard()).containsOnly(firstCardInTable,cardInHand,secondCardInTable);
+        assertThat(playerWithTheBiggestCardCount.getPlayerAllCard()).containsOnly(firstCardInTable, cardInHand, secondCardInTable);
     }
 
     @Test
-    public void isEnoughCardReturnTrue()
-    {
+    public void isEnoughCardReturnTrue() {
         //Given
         List<Player> playersList = new ArrayList<>();
         playersList.add(new Player("TestPlayer1"));
@@ -129,8 +127,7 @@ public class GameMasterTest {
     }
 
     @Test
-    public void isEnoughCardReturnFalse()
-    {
+    public void isEnoughCardReturnFalse() {
         //Given
         List<Player> playersList = new ArrayList<>();
 

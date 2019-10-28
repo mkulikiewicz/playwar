@@ -1,10 +1,9 @@
-package game.players;
+package game.main.players;
 
-import game.engine.exception.NoEnoughCardException;
-import game.equipment.GameTable;
-import game.equipment.card.Card;
-import game.equipment.card.Color;
-import game.equipment.card.Rank;
+import game.main.GameTable;
+import game.main.card.Card;
+import game.main.card.Color;
+import game.main.card.Rank;
 import org.testng.annotations.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -59,7 +58,7 @@ public class PlayerTest {
         try {
             player.putCardToTableContainer(gameTable);
         } catch (NoEnoughCardException e) {
-            temp=e;
+            temp = e;
         }
         //Then
         assertThat(temp).isInstanceOf(NoEnoughCardException.class);

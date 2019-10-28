@@ -1,4 +1,4 @@
-package game.equipment.card;
+package game.main.card;
 
 import java.util.Objects;
 

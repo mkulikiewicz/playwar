@@ -1,8 +1,7 @@
-package game.players;
+package game.main.players;
 
-import game.engine.exception.NoEnoughCardException;
-import game.equipment.GameTable;
-import game.equipment.card.Card;
+import game.main.GameTable;
+import game.main.card.Card;
 
 import java.util.LinkedList;
 import java.util.Objects;
@@ -17,7 +16,7 @@ public class Player extends Human {
         super(name);
     }
 
-    void takeCardToHand(Card card) {
+    public void takeCardToHand(Card card) {
         cardInHand.add(card);
     }
 
@@ -30,9 +29,9 @@ public class Player extends Human {
     }
 
     public void putCardToTable(GameTable gameTable) throws NoEnoughCardException {
-        if(isPlayerHaveCard()) {
+        if (isPlayerHaveCard()) {
             gameTable.putCard(this, cardInHand.remove());
-        }else
+        } else
             throw new NoEnoughCardException();
     }
 

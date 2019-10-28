@@ -1,14 +1,9 @@
-package game.equipment;
+package game.main.card;
 
-import game.equipment.card.Card;
-import game.equipment.card.Color;
-import game.equipment.card.Rank;
-
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
-import java.util.concurrent.ThreadLocalRandom;
 
 public class Deck {
     private List<Card> cardDeck = new LinkedList<>();
@@ -87,16 +82,6 @@ public class Deck {
     }
 
     private void shuffleCard() {
-        List<Card> deckAfterShuffle = new ArrayList<>();
-        while (cardDeck.size() != 0) {
-            long random = ThreadLocalRandom.current().nextLong(cardDeck.size() + deckAfterShuffle.size());
-            Optional<Card> cardAfterShuffle = cardDeck.stream().skip(random).findFirst();
-            if (cardAfterShuffle.isPresent()) {
-                Card card = cardAfterShuffle.get();
-                deckAfterShuffle.add(card);
-                cardDeck.remove(card);
-            }
-        }
-        cardDeck = deckAfterShuffle;
+        Collections.shuffle(cardDeck);
     }
 }

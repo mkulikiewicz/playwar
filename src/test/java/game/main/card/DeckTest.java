@@ -1,6 +1,5 @@
-package game.equipment;
+package game.main.card;
 
-import game.equipment.card.Card;
 import org.testng.annotations.Test;
 
 import java.util.LinkedList;

@@ -1,4 +1,4 @@
-package game.equipment.card;
+package game.main.card;
 
 import org.testng.annotations.Test;
 

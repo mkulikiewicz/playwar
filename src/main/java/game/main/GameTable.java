@@ -1,8 +1,8 @@
-package game.equipment;
+package game.main;
 
-import game.engine.exception.NoWinnerException;
-import game.equipment.card.Card;
-import game.players.Player;
+import game.main.card.Card;
+import game.main.players.NoWinnerException;
+import game.main.players.Player;
 
 import java.util.*;
 
@@ -59,7 +59,7 @@ public class GameTable {
         }
     }
 
-    public Set<Player> getListOfWinnersPlayer() {
+    Set<Player> getListOfWinnersPlayer() {
         Set<Player> winningPlayer = new HashSet<>();
         for (Map.Entry<Player, Card> entry : cardAndPlayersInTable.entrySet()) {
             if (entry.getValue().equalsRank(getWiningCard()))
@@ -68,7 +68,7 @@ public class GameTable {
         return winningPlayer;
     }
 
-    public void addCardToContainer() {
+    void addCardToContainer() {
         cardAndPlayersContainerInTable.addAll(cardAndPlayersInTable.values());
         cardAndPlayersInTable.clear();
     }

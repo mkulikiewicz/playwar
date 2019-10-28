@@ -1,9 +1,8 @@
-package game.players;
+package game.main.players;
 
-import game.engine.exception.NoWinnerException;
-import game.equipment.Deck;
-import game.equipment.GameTable;
-import game.equipment.card.Card;
+import game.main.GameTable;
+import game.main.card.Card;
+import game.main.card.Deck;
 
 import java.util.List;
 import java.util.Optional;

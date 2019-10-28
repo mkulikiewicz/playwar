@@ -1,4 +1,4 @@
-package game.engine.exception;
+package game.main.players;
 
 public class NoWinnerException extends Exception {
 }
