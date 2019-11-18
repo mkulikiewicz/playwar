@@ -1,7 +1,7 @@
 package game.main;
 
 import game.main.card.Card;
-import game.main.players.NoWinnerException;
+import game.main.exceptions.GameException;
 import game.main.players.Player;
 
 import java.util.*;
@@ -16,7 +16,7 @@ public class GameTable {
         cardAndPlayersInTable.put(player, card);
     }
 
-    public Player getWinnerPlayer() throws NoWinnerException {
+    public Player getWinnerPlayer() throws Exception {
         Map.Entry<Player, Card> winnerEntry = null;
         for (Map.Entry<Player, Card> entry : cardAndPlayersInTable.entrySet()) {
             if (winnerEntry == null || entry.getValue().biggerRankThen(winnerEntry.getValue())) {
@@ -24,7 +24,7 @@ public class GameTable {
             }
         }
         if (winnerEntry == null && cardAndPlayersContainerInTable.size() > 0)
-            throw new NoWinnerException();
+            throw GameException.noWinnerException();
         assert winnerEntry != null;
         return winnerEntry.getKey();
     }

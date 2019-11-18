@@ -3,7 +3,6 @@ package game.main;
 import game.main.card.Card;
 import game.main.card.Color;
 import game.main.card.Rank;
-import game.main.players.NoWinnerException;
 import game.main.players.Player;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
@@ -65,7 +64,7 @@ public class GameTableTest {
     }
 
     @Test
-    private void testGetWinnerPlayer() throws NoWinnerException {
+    private void testGetWinnerPlayer() throws Exception {
         //Given
         Card firstTestCard = new Card(Rank.TEN, Color.SPADES);
         gameTable.cardAndPlayersInTable.put(firstTestPlayer, firstTestCard);
@@ -81,18 +80,18 @@ public class GameTableTest {
     }
 
     @Test
-    private void testGetWinnerPlayerThrowsNoWinnerException() {
+    private void testGetWinnerPlayerThrowsException() {
         //Given
         Exception temp = new Exception();
         gameTable.cardAndPlayersContainerInTable.add(new Card(Rank.ACE, Color.DIAMONDS));
         //When
         try {
             gameTable.getWinnerPlayer();
-        } catch (NoWinnerException e) {
+        } catch (Exception e) {
             temp = e;
         }
         //Then
-        assertThat(temp).isInstanceOf(NoWinnerException.class);
+        assertThat(temp).isInstanceOf(Exception.class);
     }
 
     @Test

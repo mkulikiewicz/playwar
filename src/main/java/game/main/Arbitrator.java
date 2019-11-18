@@ -1,28 +1,11 @@
-package game.main.players;
+package game.main;
 
-import game.main.GameTable;
-import game.main.card.Card;
-import game.main.card.Deck;
+import game.main.players.Player;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-public class GameMaster extends Human {
-
-    static final Deck DECK = new Deck();
-
-    public GameMaster(String name) {
-        super(name);
-    }
-
-    public void dealTheCards(List<Player> players) {
-        while (!DECK.isDeckEmpty())
-            for (Player player : players) {
-                Optional<Card> cardOptional = DECK.getCard();
-                cardOptional.ifPresent(player::takeCardToHand);
-            }
-    }
+public class Arbitrator {
 
     public Optional<Player> checkWinnerPlayerInTable(GameTable gameTable) {
         try {
@@ -51,10 +34,4 @@ public class GameMaster extends Human {
         }
         return null;
     }
-
-    public boolean isEnoughCard(List<Player> playersList) {
-        return playersList.size() < DECK.size() && playersList.size() > 0;
-    }
 }
-
-

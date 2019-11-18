@@ -13,7 +13,7 @@ public class PlayerTest {
     GameTable gameTable = new GameTable();
 
     @Test
-    public void testPutCardToTable() throws NoEnoughCardException {
+    public void testPutCardToTable() throws Exception {
         //Given
         Player player = new Player("testPlayer");
         Card card = new Card(Rank.KNIGHT, Color.CLUBS);
@@ -37,7 +37,7 @@ public class PlayerTest {
     }
 
     @Test
-    public void putCardToTableContainer() throws NoEnoughCardException {
+    public void putCardToTableContainer() throws Exception {
         //Given
         Player player = new Player("testPlayer");
         Card card = new Card(Rank.KNIGHT, Color.CLUBS);
@@ -49,19 +49,13 @@ public class PlayerTest {
         assertThat(player.getCardCount()).isEqualTo(0);
     }
 
-    @Test
-    public void putCardToTableContainerThrowsException() {
+    @Test(expectedExceptions = Exception.class)
+    public void putCardToTableContainerThrowsException() throws Exception {
         //Given
         Player player = new Player("testPlayer");
-        Exception temp = new Exception();
         //When
-        try {
-            player.putCardToTableContainer(gameTable);
-        } catch (NoEnoughCardException e) {
-            temp = e;
-        }
-        //Then
-        assertThat(temp).isInstanceOf(NoEnoughCardException.class);
+        player.putCardToTableContainer(gameTable);
+        //Then throw and check exception
     }
 
     @Test

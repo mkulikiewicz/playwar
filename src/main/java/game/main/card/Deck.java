@@ -9,58 +9,13 @@ public class Deck {
     private List<Card> cardDeck = new LinkedList<>();
 
     public Deck() {
-        cardDeck.add(new Card(Rank.ACE, Color.DIAMONDS));
-        cardDeck.add(new Card(Rank.ACE, Color.CLUBS));
-        cardDeck.add(new Card(Rank.ACE, Color.HEARTS));
-        cardDeck.add(new Card(Rank.ACE, Color.SPADES));
-        cardDeck.add(new Card(Rank.KING, Color.DIAMONDS));
-        cardDeck.add(new Card(Rank.KING, Color.CLUBS));
-        cardDeck.add(new Card(Rank.KING, Color.HEARTS));
-        cardDeck.add(new Card(Rank.KING, Color.SPADES));
-        cardDeck.add(new Card(Rank.QUEEN, Color.DIAMONDS));
-        cardDeck.add(new Card(Rank.QUEEN, Color.CLUBS));
-        cardDeck.add(new Card(Rank.QUEEN, Color.HEARTS));
-        cardDeck.add(new Card(Rank.QUEEN, Color.SPADES));
-        cardDeck.add(new Card(Rank.KNIGHT, Color.DIAMONDS));
-        cardDeck.add(new Card(Rank.KNIGHT, Color.CLUBS));
-        cardDeck.add(new Card(Rank.KNIGHT, Color.HEARTS));
-        cardDeck.add(new Card(Rank.KNIGHT, Color.SPADES));
-        cardDeck.add(new Card(Rank.TEN, Color.DIAMONDS));
-        cardDeck.add(new Card(Rank.TEN, Color.CLUBS));
-        cardDeck.add(new Card(Rank.TEN, Color.HEARTS));
-        cardDeck.add(new Card(Rank.TEN, Color.SPADES));
-        cardDeck.add(new Card(Rank.NINE, Color.DIAMONDS));
-        cardDeck.add(new Card(Rank.NINE, Color.CLUBS));
-        cardDeck.add(new Card(Rank.NINE, Color.HEARTS));
-        cardDeck.add(new Card(Rank.NINE, Color.SPADES));
-//        cardDeck.add(new Card(Rank.EIGHT, Color.DIAMONDS));
-//        cardDeck.add(new Card(Rank.EIGHT, Color.CLUBS));
-//        cardDeck.add(new Card(Rank.EIGHT, Color.HEARTS));
-//        cardDeck.add(new Card(Rank.EIGHT, Color.SPADES));
-//        cardDeck.add(new Card(Rank.SEVEN, Color.DIAMONDS));
-//        cardDeck.add(new Card(Rank.SEVEN, Color.CLUBS));
-//        cardDeck.add(new Card(Rank.SEVEN, Color.HEARTS));
-//        cardDeck.add(new Card(Rank.SEVEN, Color.SPADES));
-//        cardDeck.add(new Card(Rank.SIX, Color.DIAMONDS));
-//        cardDeck.add(new Card(Rank.SIX, Color.CLUBS));
-//        cardDeck.add(new Card(Rank.SIX, Color.HEARTS));
-//        cardDeck.add(new Card(Rank.SIX, Color.SPADES));
-//        cardDeck.add(new Card(Rank.FIVE, Color.DIAMONDS));
-//        cardDeck.add(new Card(Rank.FIVE, Color.CLUBS));
-//        cardDeck.add(new Card(Rank.FIVE, Color.HEARTS));
-//        cardDeck.add(new Card(Rank.FIVE, Color.SPADES));
-//        cardDeck.add(new Card(Rank.FOUR, Color.DIAMONDS));
-//        cardDeck.add(new Card(Rank.FOUR, Color.CLUBS));
-//        cardDeck.add(new Card(Rank.FOUR, Color.HEARTS));
-//        cardDeck.add(new Card(Rank.FOUR, Color.SPADES));
-//        cardDeck.add(new Card(Rank.THREE, Color.DIAMONDS));
-//        cardDeck.add(new Card(Rank.THREE, Color.CLUBS));
-//        cardDeck.add(new Card(Rank.THREE, Color.HEARTS));
-//        cardDeck.add(new Card(Rank.THREE, Color.SPADES));
-//        cardDeck.add(new Card(Rank.TWO, Color.DIAMONDS));
-//        cardDeck.add(new Card(Rank.TWO, Color.CLUBS));
-//        cardDeck.add(new Card(Rank.TWO, Color.HEARTS));
-//        cardDeck.add(new Card(Rank.TWO, Color.SPADES));
+        for(Rank rank: Rank.values())
+        {
+            for(Color color: Color.values())
+            {
+                cardDeck.add(new Card(rank, color));
+            }
+        }
         shuffleCard();
     }
 
