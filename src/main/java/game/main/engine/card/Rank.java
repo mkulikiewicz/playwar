@@ -1,6 +1,6 @@
-package game.main.card;
+package game.main.engine.card;
 
-public enum Rank {
+enum Rank {
 
     TWO("2"),
     THREE("3"),

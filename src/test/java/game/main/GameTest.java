@@ -1,17 +1,14 @@
 package game.main;
 
+import game.main.engine.Game;
+import game.main.engine.GameBuilder;
 import org.testng.annotations.Test;
-
-import static org.testng.Assert.assertTrue;
 
 public class GameTest {
 
     @Test
-    public void testGameStart()
-    {
-        Game game = new Game();
-        assertTrue(game.start());
-
-
+    public void testGameStart() throws Exception {
+        Game game = new GameBuilder().addPlayers(new String[]{"2"}).build();
+        game.start();
     }
 }

@@ -1,4 +1,4 @@
-package game.main.exceptions;
+package game.main.engine.exceptions;
 
 class NoEnoughCardException extends Exception {
 }

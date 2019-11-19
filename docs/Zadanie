@@ -1,0 +1,10 @@
+W ramach zadania napisz przypadki testowe opisane w klasach (patrz na javadoc'i):
+- Zacznij od klasy Card
+- Następnie przejdź do klasy Deck
+- Kolejną klasą będzie GameException
+- Kolejną klasą będzie Croupier
+- Kolejną klasą będzie Player
+- Kolejną klasą będzie GameTable
+- Kolejną klasą będzie Arbitrator
+- Kolejną klasą będzie ArgsChecker
+- Kolejną klasą będzie Printer

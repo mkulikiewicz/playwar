@@ -1,39 +1,64 @@
-package game.main;
+package game.main.engine;
 
-import game.main.card.Card;
-import game.main.players.Player;
+import game.main.engine.card.CardInterface;
 
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ * Utwórz klasę testową Printer
+ */
 final class Printer {
 
-    private static final int NORMAL_PRINTER_TIME = 1;
+    private static final int NORMAL_PRINTER_TIME = 300;
     private static final int WAR_PRINTER_TIME = 1;
 
     private void printGameWinner(Player x) {
-        System.out.println("The winner is: " + x.getName() + " he have a " + x.getCardCount() + " cards");
+        System.out.println("The winner is: " + x + " he have a " + x.getCardCount() + " cards");
     }
 
+    /**
+     * Napisz przypadek testowy że metoda wyświetl odpowiednie znaki
+     * Nie zapomnij o sprawdzeniu odstępu czasowego ;)
+     * @param winner
+     */
     void printRoundWinner(Player winner) {
         System.out.println("Winner:" + winner);
         sleep();
     }
 
+    /**
+     * Napisz przypadek testowy że metoda wyświetla odowiednie znaki
+     * @param gameTable
+     */
     void printCardFromTable(GameTable gameTable) {
         System.out.println("On table:" + gameTable.showCardFromTable());
     }
 
+    /**
+     * Napisz przypadek testowy że metoda wyświetla odowiednie znaki
+     * @param playerList
+     */
     void printStartWar(Set<Player> playerList) {
         System.out.println("it is WAR time!!! beetwen" + playerList);
     }
 
+
+    /**
+     * Napisz przypadek testowy że metoda wyświetla odowiednie znaki
+     * @param player
+     */
     void printPlayerWithNotEnoughCard(Player player) {
-        System.out.println(player.getName() + " don't have enough card :(");
+        System.out.println(player + " don't have enough card :(");
         sleepWar(1);
     }
 
+
+    /**
+     * Napisz przypadek testowy że metoda wyświetla odowiednie znaki
+     * @param playersList
+     */
     void printEndGameMessage(List<Player> playersList) {
         for (Player x : playersList) {
             if (x.getCardCount() > 0)
@@ -42,9 +67,14 @@ final class Printer {
 
     }
 
+
+    /**
+     * Napisz przypadek testowy że metoda wyświetla odowiednie znaki
+     * @param gameTable
+     */
     void printCardFromTableInWar(GameTable gameTable) {
-        Map<Player, Card> cardFromTable = gameTable.showCardFromTable();
-        for (Map.Entry<Player, Card> entry : cardFromTable.entrySet()) {
+        Map<Player, CardInterface> cardFromTable = gameTable.showCardFromTable();
+        for (Map.Entry<Player, CardInterface> entry : cardFromTable.entrySet()) {
             sleepWar(cardFromTable.size());
             System.out.println(entry.getKey() + ": " + entry.getValue());
         }
@@ -75,7 +105,7 @@ final class Printer {
         System.out.println("Argument wasn't correct " + e.getMessage() + " we use default value {5}");
     }
 
-    void printNotEnoughCardToStartGame() {
+    static void printNotEnoughCardToStartGame() {
         System.out.println("Not enough card to start play or is to low players");
     }
 
@@ -83,7 +113,7 @@ final class Printer {
         System.out.print("\t".repeat(25) + "Stats:");
         for (Player player : playerList) {
             if (player.getCardCount() > 0)
-                System.out.print(" " + player.getName() + "[" + player.getCardCount() + "]");
+                System.out.print(" " + player + "[" + player.getCardCount() + "]");
         }
         System.out.println("\n");
     }

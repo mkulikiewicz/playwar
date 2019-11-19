@@ -1,4 +1,4 @@
-package game.main.card;
+package game.main.engine.card;
 
 import org.testng.annotations.Test;
 
@@ -16,7 +16,7 @@ public class DeckTest {
         //Given
         Deck deck = new Deck();
         //When
-        Optional<Card> card = deck.getCard();
+        Optional<? extends CardInterface> card = deck.getCard();
         //Then
         assertThat(card.isPresent()).isTrue();
         assertThat(card.get()).isInstanceOf(Card.class);
@@ -27,11 +27,11 @@ public class DeckTest {
         //Given
         Deck deck = new Deck();
         //When
-        Queue<Card> cardFromDeck = new LinkedList<>(getCardFromDeck(deck));
+        Queue<CardInterface> cardFromDeck = new LinkedList<>(getCardFromDeck(deck));
         //Then
         assertThat(cardFromDeck).hasOnlyElementsOfType(Card.class);
         for (int i = 0; i < cardFromDeck.size(); ) {
-            Card getCard = cardFromDeck.remove();
+            CardInterface getCard = cardFromDeck.remove();
             assertThat(cardFromDeck).doesNotContain(getCard);
         }
     }
@@ -78,9 +78,9 @@ public class DeckTest {
         assertThat(deckSize).isGreaterThan(0);
     }
 
-    private List<Card> getCardFromDeck(Deck deck) {
-        List<Card> temp = new LinkedList<>();
-        Optional<Card> optionalCard = deck.getCard();
+    private List<? extends CardInterface> getCardFromDeck(Deck deck) {
+        List<CardInterface> temp = new LinkedList<>();
+        Optional<? extends CardInterface> optionalCard = deck.getCard();
         while (optionalCard.isPresent()) {
             temp.add(optionalCard.get());
             optionalCard = deck.getCard();

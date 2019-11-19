@@ -1,6 +1,6 @@
-package game.main.card;
+package game.main.engine.card;
 
-public enum Color {
+enum Color {
     SPADES('\u2660'),// ♠
     HEARTS('\u2665'), // ♥
     CLUBS('\u2663'), // ♣
